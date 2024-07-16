@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfect Billing</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        #form-container, #invoice-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #form-container h2, #form-container h3 {
+            color: #007b8f;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input, select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #007b8f;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005f6b;
+        }
+
+        .order-item {
+            position: relative;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .remove-item {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff4d4d;
+            border: none;
+            border-radius: 50px;
+            color: white;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            padding: 0px;
+        }
+
+        .remove-item:hover {
+            background-color: #cc0000;
+        }
+
+        #header {
+            background-color: #007b8f;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #header img {
+            width: 100px;
+            border-radius: 100px;
+        }
+
+        #header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        #company-details {
+            text-align: right;
+        }
+
+        #company-details h2 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        #company-details p {
+            margin: 2px 0;
+        }
+
+        #customer-details {
+            margin: 20px 0;
+        }
+
+        #customer-details p {
+            margin: 2px 0;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        #total {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        #total p {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        #footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #777;
+        }
+        #footer p:nth-child(1){
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        #download {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #007b8f;
+            color: white;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #invoice {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100vh;
+            padding: 0 20px;
+        }
+
+        #invoice-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="form-container">
+        <h2>Enter Customer Details</h2>
+        <form id="billing-form">
+            <label for="customer-name">Customer Name:</label>
+            <input type="text" id="customer-name" name="customer-name" required><br><br>
+            <h3>Order Details</h3>
+            <div id="order-details">
+                <div class="order-item">
+                    <label for="item-name">Item Name:</label>
+                    <select class="item-name" name="item-name" required>
+                        <option value="Dress">Dress</option>
+                        <option value="Kurti">Kurti</option>
+                        <option value="Pant">Pant</option>
+                        <option value="Plazo">Plazo</option>
+                        <option value="Blouse">Blouse</option>
+                        <option value="Chaniyacholi">Chaniyacholi</option>
+                        <option value="One Piece">One Piece</option>
+                        <option value="Dhoti">Dhoti</option>
+                    </select>
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" class="quantity" name="quantity" required>
+                    <label for="price">Price:</label>
+                    <input type="number" class="price" name="price" required>
+                    <button type="button" class="remove-item">x</button>
+                </div>
+            </div>
+            <button type="button" id="add-item">Add Another Item</button><br><br>
+            <button type="submit">Generate Bill</button>
+        </form>
+    </div>
+
+    <div id="invoice-container" class="hidden">
+        <div id="invoice">
+            <div id="header">
+                <img src="images.png" alt="Logo">
+                <h1>Invoice</h1>
+                <div id="company-details">
+                    <h2>PERFECT DESIGNER HUB</h2>
+                    <p>VIJAY GOHEL</p>
+                    <p>9712520353</p>
+                </div>
+            </div>
+            <div id="invoice-content">
+                <div id="customer-details">
+                    <p>Name: <span id="customer-name-display"></span></p>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Item Name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="order-items">
+                    </tbody>
+                </table>
+                <div id="total">
+                    <p>Total: ₹<span id="total-amount"></span></p>
+                </div>
+            </div>
+            <div id="footer">
+                <p>Shyam Complex, B/H balaji hall, 150ft ring road, Rajkot 360004</p>
+                <p>Thank you for your purchase!</p>
+            </div>
+        </div>
+        <button id="download">Download PDF</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <script>
+        document.getElementById('add-item').addEventListener('click', function () {
+            var orderDetails = document.getElementById('order-details');
+            var newItem = document.createElement('div');
+            newItem.classList.add('order-item');
+            newItem.innerHTML = `
+                <label for="item-name">Item Name:</label>
+                <select class="item-name" name="item-name" required>
+                    <option value="Dress">Dress</option>
+                    <option value="Kurti">Kurti</option>
+                    <option value="Pant">Pant</option>
+                    <option value="Plazo">Plazo</option>
+                    <option value="Blouse">Blouse</option>
+                    <option value="Chaniyacholi">Chaniyacholi</option>
+                    <option value="One Piece">One Piece</option>
+                    <option value="Dhoti">Dhoti</option>
+                </select>
+                <label for="quantity">Quantity:</label>
+                <input type="number" class="quantity" name="quantity" required>
+                <label for="price">Price:</label>
+                <input type="number" class="price" name="price" required>
+                <button type="button" class="remove-item">x</button>
+            `;
+            orderDetails.appendChild(newItem);
+        });
+
+        document.getElementById('order-details').addEventListener('click', function (event) {
+            if (event.target.classList.contains('remove-item')) {
+                event.target.parentElement.remove();
+            }
+        });
+        var customerName;
+        document.getElementById('billing-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            customerName = document.getElementById('customer-name').value;
+            document.getElementById('customer-name-display').innerText = customerName;
+
+            var orderItems = document.querySelectorAll('.order-item');
+            var orderItemsContainer = document.getElementById('order-items');
+            orderItemsContainer.innerHTML = '';
+
+            var totalAmount = 0;
+            orderItems.forEach(function (item, index) {
+                var itemName = item.querySelector('.item-name').value;
+                var quantity = item.querySelector('.quantity').value;
+                var price = item.querySelector('.price').value;
+                var total = quantity * price;
+                totalAmount += total;
+
+                var row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${itemName}</td>
+                    <td>${quantity}</td>
+                    <td>${price}</td>
+                    <td>${total}</td>
+                `;
+                orderItemsContainer.appendChild(row);
+            });
+
+            document.getElementById('total-amount').innerText = totalAmount.toFixed(2);
+
+            document.getElementById('form-container').classList.add('hidden');
+            document.getElementById('invoice-container').classList.remove('hidden');
+        });
+
+        document.getElementById('download').addEventListener('click', function () {
+            var element = document.getElementById('invoice');
+            var opt = {
+                margin:       0.2,
+                filename:     customerName+'.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().from(element).set(opt).save();
+        });
+    </script>
+</body>
+
+</html>
