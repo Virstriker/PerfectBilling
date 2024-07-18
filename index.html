@@ -222,6 +222,8 @@
                     <button type="button" class="remove-item">x</button>
                 </div>
             </div>
+            <label for="paid-amount-input">Paid Amount:</label>
+    <input type="number" id="paid-amount-input" name="paid-amount" required>
             <button type="button" id="add-item">Add Another Item</button><br><br>
             <button type="submit">Generate Bill</button>
         </form>
@@ -257,6 +259,8 @@
                 </table>
                 <div id="total">
                     <p>Total: ₹<span id="total-amount"></span></p>
+                    <p>Paid: ₹<span id="paid-amount"></span></p>
+                    <p>Amount To Pay: ₹<span id="amount-to-pay"></span></p>
                 </div>
             </div>
             <div id="footer">
@@ -332,8 +336,10 @@
                 `;
                 orderItemsContainer.appendChild(row);
             });
-
+            var paidAmount = document.getElementById('paid-amount-input').value;
             document.getElementById('total-amount').innerText = totalAmount.toFixed(2);
+            document.getElementById('paid-amount').innerText = paidAmount;
+            document.getElementById('amount-to-pay').innerText = totalAmount.toFixed(2)-paidAmount;
 
             document.getElementById('form-container').classList.add('hidden');
             document.getElementById('invoice-container').classList.remove('hidden');
