@@ -1,3 +1,13 @@
+CREATE TABLE Admin (
+    id BIGINT PRIMARY KEY,
+    Name VARCHAR(255),
+    Surname VARCHAR(255),
+    PhoneNumber BIGINT,
+    UserId BIGINT,
+    UserPassword VARCHAR(255),
+    Branch VARCHAR(255)
+);
+
 CREATE TABLE CustomerTable (
     id BIGINT PRIMARY KEY,
     Name VARCHAR(255),
@@ -5,15 +15,18 @@ CREATE TABLE CustomerTable (
     PhoneNumber BIGINT,
     Address VARCHAR(255)
 );
+
 CREATE TABLE OrderTable (
     id BIGINT PRIMARY KEY,
     CustomerId BIGINT,
+    BranchName VARCHAR(255),
     OrderTables VARCHAR(255),
     OrderDate DATE,
     DeliveryDate DATE,
     OrderStatus BOOLEAN,
     FOREIGN KEY (CustomerId) REFERENCES CustomerTable(id) ON DELETE CASCADE
 );
+
 CREATE TABLE Chaniyo (
     id BIGINT PRIMARY KEY,
     OrderTableId BIGINT,
@@ -23,6 +36,7 @@ CREATE TABLE Chaniyo (
     DesingImage VARCHAR(255),
     FOREIGN KEY (OrderTableId) REFERENCES OrderTable(id) ON DELETE CASCADE
 );
+
 CREATE TABLE Blouse (
     id BIGINT PRIMARY KEY,
     OrderTableId BIGINT,
@@ -39,8 +53,6 @@ CREATE TABLE Blouse (
     FOREIGN KEY (OrderTableId) REFERENCES OrderTable(id) ON DELETE CASCADE
 );
 
-### Dress
-```sql
 CREATE TABLE Dress (
     id BIGINT PRIMARY KEY,
     OrderTableId BIGINT,
@@ -56,6 +68,7 @@ CREATE TABLE Dress (
     DesingImage VARCHAR(255),
     FOREIGN KEY (OrderTableId) REFERENCES OrderTable(id) ON DELETE CASCADE
 );
+
 CREATE TABLE Pant (
     id BIGINT PRIMARY KEY,
     OrderTableId BIGINT,
@@ -65,6 +78,7 @@ CREATE TABLE Pant (
     Detail VARCHAR(255),
     FOREIGN KEY (OrderTableId) REFERENCES OrderTable(id) ON DELETE CASCADE
 );
+
 CREATE TABLE Measurement (
     id BIGINT PRIMARY KEY,
     CustomerId BIGINT,
