@@ -1,5 +1,5 @@
 CREATE TABLE Admin (
-    id BIGINT PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     Name VARCHAR(255),
     Surname VARCHAR(255),
     PhoneNumber BIGINT,
@@ -9,7 +9,7 @@ CREATE TABLE Admin (
 );
 
 CREATE TABLE CustomerTable (
-    id BIGINT PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     Name VARCHAR(255),
     Surname VARCHAR(255),
     PhoneNumber BIGINT,
@@ -17,7 +17,7 @@ CREATE TABLE CustomerTable (
 );
 
 CREATE TABLE OrderTable (
-    id BIGINT PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     CustomerId BIGINT,
     BranchName VARCHAR(255),
     OrderTables VARCHAR(255),
@@ -28,7 +28,7 @@ CREATE TABLE OrderTable (
 );
 
 CREATE TABLE Chaniyo (
-    id BIGINT PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     OrderTableId BIGINT,
     Style VARCHAR(255),
     Detail VARCHAR(255),
@@ -38,7 +38,7 @@ CREATE TABLE Chaniyo (
 );
 
 CREATE TABLE Blouse (
-    id BIGINT PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     OrderTableId BIGINT,
     Style VARCHAR(255),
     NeckDesign VARCHAR(255),
@@ -54,7 +54,7 @@ CREATE TABLE Blouse (
 );
 
 CREATE TABLE Dress (
-    id BIGINT PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     OrderTableId BIGINT,
     Style VARCHAR(255),
     NeckDesign VARCHAR(255),
@@ -70,7 +70,7 @@ CREATE TABLE Dress (
 );
 
 CREATE TABLE Pant (
-    id BIGINT PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     OrderTableId BIGINT,
     Rubbert VARCHAR(255),
     NeckDesign VARCHAR(255),
@@ -80,7 +80,7 @@ CREATE TABLE Pant (
 );
 
 CREATE TABLE Measurement (
-    id BIGINT PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     CustomerId BIGINT,
     Sholder FLOAT,
     SholderSlope FLOAT,
