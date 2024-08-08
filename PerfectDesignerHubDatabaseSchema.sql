@@ -3,7 +3,7 @@ CREATE TABLE Admin (
     Name VARCHAR(255),
     Surname VARCHAR(255),
     PhoneNumber BIGINT,
-    UserId BIGINT,
+    UserId VARCHAR(255),
     UserPassword VARCHAR(255),
     Branch VARCHAR(255)
 );
@@ -24,6 +24,7 @@ CREATE TABLE OrderTable (
     OrderDate DATE,
     DeliveryDate DATE,
     OrderStatus BOOLEAN,
+    TotalPrice FLOAT,
     FOREIGN KEY (CustomerId) REFERENCES CustomerTable(id) ON DELETE CASCADE
 );
 
@@ -34,6 +35,7 @@ CREATE TABLE Chaniyo (
     Detail VARCHAR(255),
     ClothImage VARCHAR(255),
     DesingImage VARCHAR(255),
+    Price FLOAT,
     FOREIGN KEY (OrderTableId) REFERENCES OrderTable(id) ON DELETE CASCADE
 );
 
@@ -50,6 +52,7 @@ CREATE TABLE Blouse (
     Detail VARCHAR(255),
     ClothImage VARCHAR(255),
     DesingImage VARCHAR(255),
+    Price FLOAT,
     FOREIGN KEY (OrderTableId) REFERENCES OrderTable(id) ON DELETE CASCADE
 );
 
@@ -66,6 +69,7 @@ CREATE TABLE Dress (
     Detail VARCHAR(255),
     ClothImage VARCHAR(255),
     DesingImage VARCHAR(255),
+    Price FLOAT,
     FOREIGN KEY (OrderTableId) REFERENCES OrderTable(id) ON DELETE CASCADE
 );
 
@@ -76,6 +80,7 @@ CREATE TABLE Pant (
     NeckDesign VARCHAR(255),
     Pocket BOOLEAN,
     Detail VARCHAR(255),
+    Price FLOAT,
     FOREIGN KEY (OrderTableId) REFERENCES OrderTable(id) ON DELETE CASCADE
 );
 
