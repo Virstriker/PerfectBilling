@@ -139,5 +139,6 @@ CREATE TABLE DailyOrders(
     OrderDetail VARCHAR(255),
     OrderState INT,
     OrderDate DATE,
+    DeliveryDate Date,
     FOREIGN KEY (CustomerId) REFERENCES CustomerTable(id) ON DELETE CASCADE
 )
