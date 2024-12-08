@@ -142,3 +142,42 @@ CREATE TABLE DailyOrders(
     DeliveryDate Date,
     FOREIGN KEY (CustomerId) REFERENCES CustomerTable(id) ON DELETE CASCADE
 )
+
+CREATE TABLE IF NOT EXISTS top (
+    id BIGINT PRIMARY KEY,
+    ordertableid BIGINT,
+    item VARCHAR(255),
+    style VARCHAR(255),
+    frontneckdesign VARCHAR(255),
+    backneckdesign VARCHAR(255),
+    astar BOOLEAN,
+    openingside VARCHAR(255),
+    inneck VARCHAR(255),
+    backofneck VARCHAR(255),
+    dori BOOLEAN,
+    sleeve VARCHAR(255),
+    detail VARCHAR(255),
+    clotheimage VARCHAR(255),
+    desingimage VARCHAR(255),
+    price Double precision,
+    CONSTRAINT blouse_ordertableid_fkey FOREIGN KEY (ordertableid)
+        REFERENCES public.ordertable (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS bottom (
+    id BIGINT PRIMARY KEY,
+    ordertableid BIGINT,
+    item VARCHAR(255),
+    style VARCHAR(255),
+    rubber VARCHAR(255),
+    pocket BOOLEAN,
+    detail VARCHAR(255),
+    desingimage VARCHAR(255),
+    price Double precision,
+    CONSTRAINT blouse_ordertableid_fkey FOREIGN KEY (ordertableid)
+        REFERENCES public.ordertable (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+);
