@@ -23,7 +23,7 @@ CREATE TABLE OrderTable (
     OrderTables VARCHAR(255),
     OrderDate DATE,
     DeliveryDate DATE,
-    OrderStatus BOOLEAN,
+    OrderStatus number,
     FOREIGN KEY (CustomerId) REFERENCES CustomerTable(id) ON DELETE CASCADE
 );
 
